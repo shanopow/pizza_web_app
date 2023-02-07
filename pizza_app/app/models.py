@@ -1,37 +1,36 @@
 from django.db import models
-from django.core.validators import MaxValueValidator
 # pizza choices for dropdowns
 # should be moved to be like django 3+ implementation later
 size_choice = (
-    ('small', 'SMALL'),
-    ('medium', 'MEDIUM'),
-    ('large', 'LARGE'),
+    ('Small', 'SMALL'),
+    ('Medium', 'MEDIUM'),
+    ('Large', 'LARGE'),
 )
 
 crust_choice = (
-    ('normal', 'NORMAL'),
-    ('thin', 'THIN'),
-    ('thick', 'THICK'),
-    ('gluten free', 'GLUTEN FREE'),
+    ('Normal', 'NORMAL'),
+    ('Thin', 'THIN'),
+    ('Thick', 'THICK'),
+    ('Gluten free', 'GLUTEN FREE'),
 )
 
 sauce_choice = (
-    ('tomato', 'TOMATO'), 
-    ('bbq', 'BBQ'),
+    ('Tomato', 'TOMATO'), 
+    ('Bbq', 'BBQ'),
 )
 
 cheese_choice = (
-    ('mozzarella', 'MOZZARELLA'),
-    ('vegan', 'VEGAN'),
-    ('low-fat', 'LOW FAT'),
+    ('Mozzarella', 'MOZZARELLA'),
+    ('Vegan', 'VEGAN'),
+    ('Low-fat', 'LOW FAT'),
 )
 
 class Pizza(models.Model):
     id = models.AutoField(primary_key=True)
-    size = models.CharField(max_length=6, choices=size_choice, default='medium')
-    crust = models.CharField(max_length=11, choices=crust_choice, default='normal')
-    sauce = models.CharField(max_length=6, choices=sauce_choice, default='tomato')
-    cheese = models.CharField(max_length=10, choices=size_choice, default='mozzarella')
+    size = models.CharField(max_length=6, choices=size_choice, default='Medium')
+    crust = models.CharField(max_length=11, choices=crust_choice, default='Normal')
+    sauce = models.CharField(max_length=6, choices=sauce_choice, default='Tomato')
+    cheese = models.CharField(max_length=10, choices=size_choice, default='Mozzarella')
     pepperoni = models.BooleanField(default=False)
     chicken = models.BooleanField(default=False)
     ham = models.BooleanField(default=False)
@@ -42,11 +41,11 @@ class Pizza(models.Model):
 
 class Customer(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.TextField(default='Your Name Here')
-    address = models.TextField(default='Your Address Here')
+    name = models.CharField(default='Your Name Here', max_length=256)
+    address = models.CharField(default='Your Address Here', max_length=256)
     card = models.IntegerField(default=0)
     expiry = models.CharField(default='MM/YY', max_length=5)
-    cvv = models.IntegerField(default=000, validators=[MaxValueValidator(999)])
+    cvv = models.IntegerField(default=000)
 
 class Order(models.Model):
     id = models.AutoField(primary_key=True)

@@ -1,4 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-    Here is your Order: {{order}} 
+    <h1>Here is your Order</h1>
+    
+    <article>
+        <header> <b>Pizza</b> </header>
+          <p> Size: {{ order.pizza.size }} <p> 
+          <p> Crust: {{ order.pizza.crust }} </p>
+          <p> Sauce: {{ order.pizza.sauce }} </p>
+          <p> Cheese: {{ order.pizza.cheese }} </p>
+          <br>
+          <p> <b>Toppings: </b></p>
+          <ul>
+            {% for key, value in toppings.items %}
+              {% if value  %}  
+                <p>{{ key }}</p>
+              {% endif %}
+            {% endfor %}
+        </ul>
+    </article>
+
+    <article>
+        <header> <b>Your details </b> </header>
+          <p> Name: {{ order.customer.name }} <p> 
+          <p> Address: {{ order.customer.address }} </p>
+          <p> Card: {{ order.customer.card }} </p>
+          <p> Expiry: {{ order.customer.expiry }} </p>
+          <p> CVV : {{ order.customer.cvv}}</p>
+    </article>
+
 {% endblock %}

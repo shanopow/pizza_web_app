@@ -1,9 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="details" method="POST">
-        {% csrf_token %}
-        {{ form.as_table }}
+<form action="details" method="post">
+    {% csrf_token %}
+    <p>
+        {{ form.name.label }}<br>
+        {{ form.name }}<br>
+    </p>        
+
+    <p>
+        {{ form.address.label }}<br>
+        {{ form.address }}<br>
+    </p>
+
+    <p>
+        {{ form.card.label }}<br>
+        {{ form.card }}<br>
+    </p>
+    
+    <p>
+        {{ form.expiry.label }}<br>
+        {{ form.expiry }}<br>
+    </p>
+    <p>
+        {{ form.cvv.label }}<br>
+        {{ form.cvv }}<br>
+        </p>
+    <p>
         <button type="submit">Submit</button>
-    </form>
+    </p>
+</form>
+
 {% endblock %}

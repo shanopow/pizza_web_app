@@ -6,11 +6,11 @@ from .models import Order, Customer, Pizza
 def index(request):
     if request.method == "POST":
         form = PizzaForm(request.POST)
-        cust_form = CustomerForm(request.POST)
         if form.is_valid():
             pizz = form.save()
             request.session['pizz_id'] = pizz.id
-            return render(request, 'details.html', {'form': cust_form, 'pizza':pizz})
+            cust_form = CustomerForm(request.POST)
+            return render(request, 'details.html', {'form': cust_form})
         else:
             return render(request, 'index.html', {'form': form})
     else:
@@ -24,9 +24,10 @@ def details(request):
             cust = form.save()
             pizz = request.session.get('pizz_id')
             pizza = Pizza.objects.filter(id=pizz).first()
+            toppings = {'Pepperoni': pizza.pepperoni, 'Chicken': pizza.chicken, 'Ham': pizza.ham, 'Pineapple': pizza.pineapple, 'Pepper': pizza.pepper, 'Mushroom': pizza.mushroom, 'Onion': pizza.onion}
             order = Order(customer=cust, pizza=pizza)
             order.save()
-            return render(request, 'final.html', {'order' : order})
+            return render(request, 'final.html', {'order' : order, 'toppings': toppings})
         else:
             return render(request, 'details.html', {'form': form})
     else:

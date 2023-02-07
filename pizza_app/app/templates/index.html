@@ -1,9 +1,68 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_table }}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>
+        {{ form.size.label }}<br>
+        {{ form.size }}<br>
+    </p>        
+
+    <p>
+        {{ form.crust.label }}<br>
+        {{ form.crust}}<br>
+    </p>
+
+    <p>
+        {{ form.sauce.label }}<br>
+        {{ form.sauce }}<br>
+    </p>
+    
+    <p>
+        {{ form.cheese.label }}<br>
+        {{ form.cheese }}<br>
+    </p>
+    
+    <p>
+        {{form.pepperoni}}
+        {{ form.pepperoni.label }}
+        <br>
+         
+        {{form.chicken}}
+        {{ form.chicken.label }}
+        <br>
+         
+        {{form.ham}}
+        {{ form.ham.label }}
+        <br>
+         
+        {{form.pineapple}}
+        {{ form.pineapple.label }}
+        <br>
+        
+        {{form.pepper}}
+        {{ form.pepper.label }}
+        <br>
+        
+        {{form.mushroom}}
+        {{ form.mushroom.label }}
+        <br>
+         
+        {{form.onion}}
+        {{ form.onion.label }}
+        <br>
+    </p>
+    <br>
+    <p>
         <button type="submit">Submit</button>
-    </form>
+    </p>
+</form>
 {% endblock %}
+
+    pepperoni = models.BooleanField(default=False)
+    chicken = models.BooleanField(default=False)
+    ham = models.BooleanField(default=False)
+    pineapple = models.BooleanField(default=False)
+    pepper = models.BooleanField(default=False)
+    mushroom = models.BooleanField(default=False)
+    onion = models.BooleanField(default=False)
