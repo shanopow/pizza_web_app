@@ -16,16 +16,16 @@
                 <p>{{ key }}</p>
               {% endif %}
             {% endfor %}
-        </ul>
+          </ul>
     </article>
 
     <article>
         <header> <b>Your details </b> </header>
-          <p> Name: {{ order.customer.name }} <p> 
-          <p> Address: {{ order.customer.address }} </p>
-          <p> Card: {{ order.customer.card }} </p>
-          <p> Expiry: {{ order.customer.expiry }} </p>
-          <p> CVV : {{ order.customer.cvv}}</p>
-    </article>
+        {% for key, value in dets.items %}
+        {% if key != '_state' %}  
+        <p> {{ key }} : {{ value }} <p>  
+        {% endif %}
+          {% endfor %}
+        </article>
 
 {% endblock %}
