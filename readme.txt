@@ -1,6 +1,7 @@
 project spec re-written here with less fluff
 
 1.
+DONE
 index - create pizza with form
 redir to login page for name address payment which is authed
 
@@ -20,14 +21,17 @@ BooleanField topping checkboxes for:
     - Onions
 order (submit)
 
+DONE
 3. details form
 name
 address
 card number
 expiry date
 card cvv
+TO-DO
 must be validated
 
+DONE
 4. final page
 if validated is true redir again
 shows options selected on form

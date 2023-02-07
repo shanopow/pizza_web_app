@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .forms import PizzaForm, CustomerForm
 from .models import Order, Customer, Pizza
+from django.views.generic import TemplateView
 
 def index(request):
     if request.method == "POST":

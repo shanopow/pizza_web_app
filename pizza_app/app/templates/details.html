@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<p>
+{{ form.non_field_errors }}
+</p>
 <form action="details" method="post">
     {% csrf_token %}
     <p>
         {{ form.name.label }}<br>
         {{ form.name }}<br>
-    </p>        
+    </p>
 
     <p>
         {{ form.address.label }}<br>
@@ -16,6 +19,7 @@
     <p>
         {{ form.card.label }}<br>
         {{ form.card }}<br>
+        {{ form.errors.card }} <br>
     </p>
     
     <p>
@@ -25,10 +29,12 @@
     <p>
         {{ form.cvv.label }}<br>
         {{ form.cvv }}<br>
-        </p>
+        {{ form.errors.cvv }} <br>
+    </p>
     <p>
         <button type="submit">Submit</button>
     </p>
 </form>
+
 
 {% endblock %}
