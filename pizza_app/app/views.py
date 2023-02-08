@@ -22,12 +22,11 @@ def details(request):
             cust = form.save()
             pizz = request.session.get('pizz_id')
             pizza = Pizza.objects.filter(id=pizz).first()
-            toppings = {'Pepperoni': pizza.pepperoni, 'Chicken': pizza.chicken, 'Ham': pizza.ham, 'Pineapple': pizza.pineapple, 'Pepper': pizza.pepper, 'Mushroom': pizza.mushroom, 'Onion': pizza.onion}
+            toppings = {'pepperoni': pizza.pepperoni, 'chicken': pizza.chicken, 'ham': pizza.ham, 'pineapple': pizza.pineapple, 'pepper': pizza.pepper, 'mushroom': pizza.mushroom, 'onion': pizza.onion}
             order = Order(customer=cust, pizza=pizza)
             order.save()
-            dets = cust.__dict__
-            print(dets)
-            return render(request, 'final.html', {'order' : order, 'toppings': toppings, 'dets': dets})
+            print(order.pizza.__dict__)
+            return render(request, 'final.html', {'pizza' : order.pizza.__dict__, 'customer' : order.customer.__dict__, 'toppings' : toppings})
         else:
             return render(request, 'details.html', {'form': form})
     else:

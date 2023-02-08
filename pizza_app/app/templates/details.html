@@ -1,33 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<h1>Enter Your details below</h1>
 <form action="details" method="post">
     {{ form.non_field_errors }}
     {% csrf_token %}
-    <p>
+    <div class="form-element">
         {{ form.name.label }}<br>
         {{ form.name }}<br>
-    </p>
+    </div>
 
-    <p>
+    <div class="form-element">
         {{ form.address.label }}<br>
         {{ form.address }}<br>
-    </p>
+    </div>
 
-    <p>
+    <div class="form-element">
         {{ form.card.label }}<br>
         {{ form.card }}<br>
-    </p>
+    </div>
     
-    <p>
+    <div class="form-element">
         {{ form.expiry.label }}<br>
         {{ form.expiry }}<br>
-    </p>
-    <p>
+    </div>
+
+    <div class="form-element">
         {{ form.cvv.label }}<br>
         {{ form.cvv }}<br>
-    </p>
+    </div>
+    
     <p>
         <button type="submit">Submit</button>
     </p>

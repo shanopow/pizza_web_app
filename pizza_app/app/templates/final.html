@@ -1,29 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Here is your Order</h1>
-    
+
     <article>
-        <header> <b>Pizza</b> </header>
-          <p> Size: {{ order.pizza.size }} <p> 
-          <p> Crust: {{ order.pizza.crust }} </p>
-          <p> Sauce: {{ order.pizza.sauce }} </p>
-          <p> Cheese: {{ order.pizza.cheese }} </p>
-          <br>
+        <header> <b>Pizza No. {{ pizza.id }}</b> </header>
+          {% for key, value in pizza.items %}
+            {% if key != '_state' and key != 'id' and key not in toppings %}  
+              <p> {{ key | title }} : {{ value }} <p>  
+            {% endif %}
+          {% endfor %}
           <p> <b>Toppings: </b></p>
           <ul>
             {% for key, value in toppings.items %}
-              {% if value  %}  
-                <p>{{ key }}</p>
+              {% if value %}
+                <p>{{ key | title }}</p>
               {% endif %}
             {% endfor %}
           </ul>
     </article>
-
     <article>
-        <header> <b>Your details </b> </header>
-        {% for key, value in dets.items %}
-        {% if key != '_state' %}  
-        <p> {{ key }} : {{ value }} <p>  
+        <header> <b>Customer No. {{ customer.id }} </b> </header>
+        {% for key, value in customer.items %}
+        {% if key != '_state' and key != 'id' %}  
+        <p> {{ key | title }} : {{ value }} <p>  
         {% endif %}
           {% endfor %}
         </article>

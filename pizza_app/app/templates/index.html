@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1> Order </h1>
 <form action="" method="post">
+    <h3>Make your pizza</h3>
     {% csrf_token %}
     <p>
         {{ form.size.label }}<br>
