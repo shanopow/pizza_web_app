@@ -10,6 +10,7 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['name', 'address', 'card', 'expiry', 'cvv']
+        # autofill for mm/yy
         widgets = {
             'expiry': forms.TextInput(attrs={'placeholder': 'MM/YY'}),
         }
@@ -20,20 +21,29 @@ class CustomerForm(forms.ModelForm):
 
         dat = data['expiry']
         data_m = dat[0:2]
+        data_y = dat[3:]
         
+        # too short
         if len(str(dat)) != 5:
-            raise forms.ValidationError('Invalid Expiry Date')
+            raise forms.ValidationError('Expiry Date is too short')
         
+        # format
         elif dat[2] != '/':
-            raise forms.ValidationError('Invalid Expiry Date')
+            raise forms.ValidationError('Missing "/" between month and year of expiry' )
         
         elif data_m not in allowed_months:
-            raise forms.ValidationError('Invalid Expiry Date')
-
+            raise forms.ValidationError('Month is invalid')
+        
         elif len(str(data['cvv'])) != 3:
             raise forms.ValidationError('Invalid CVV') 
 
         elif len(str(data['card'])) > 19 or len(str(data['card'])) < 4:
-            raise forms.ValidationError('Invalid card Number')
+            raise forms.ValidationError('Invalid Card Number')
 
+        try:
+            data_y = int(data_y)
+        except:
+            raise forms.ValidationError('Year is invalid')
+        
+        
         return data

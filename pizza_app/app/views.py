@@ -10,7 +10,7 @@ def index(request):
         pizz = form.save()
         # move pizza_id to session so we can use it later in details
         request.session['pizz_id'] = pizz.id
-        # dont need validation ass only dropdowns and booleans
+        # dont need validation as only dropdowns and booleans in PizzaForm
         cust_form = CustomerForm()
         return render(request, 'details.html', {'form': cust_form})
     
