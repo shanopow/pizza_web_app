@@ -8,10 +8,14 @@ def index(request):
     if request.method == "POST":
         form = PizzaForm(request.POST)
         pizz = form.save()
+        # move pizza_id to session so we can use it later in details
         request.session['pizz_id'] = pizz.id
+        # dont need validation ass only dropdowns and booleans
         cust_form = CustomerForm()
         return render(request, 'details.html', {'form': cust_form})
+    
     else:
+        # get
         form = PizzaForm()
         return render(request, 'index.html', {'form': form})
 
@@ -20,15 +24,26 @@ def details(request):
         form = CustomerForm(request.POST)
         if form.is_valid():
             cust = form.save()
+            
+            # get pizza from session in index view
             pizz = request.session.get('pizz_id')
             pizza = Pizza.objects.filter(id=pizz).first()
+            
+            # extract toppings for nice templating
             toppings = {'pepperoni': pizza.pepperoni, 'chicken': pizza.chicken, 'ham': pizza.ham, 'pineapple': pizza.pineapple, 'pepper': pizza.pepper, 'mushroom': pizza.mushroom, 'onion': pizza.onion}
+            
+            # make order
             order = Order(customer=cust, pizza=pizza)
             order.save()
-            print(order.pizza.__dict__)
+            # make dicts of the object so we can print nicer in the template
+            # could give order model but nastier template then
             return render(request, 'final.html', {'pizza' : order.pizza.__dict__, 'customer' : order.customer.__dict__, 'toppings' : toppings})
+    
         else:
+            # bad form
             return render(request, 'details.html', {'form': form})
+    
     else:
+        # get
         form = CustomerForm()
         return render(request, 'details.html', {'form': form})

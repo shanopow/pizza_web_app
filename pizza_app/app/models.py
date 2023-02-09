@@ -1,6 +1,8 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
 # pizza choices for dropdowns
-# should be moved to be like django 3+ implementation later
+# move to be like django 3+ implementation with subclasses later
 size_choice = (
     ('Small', 'SMALL'),
     ('Medium', 'MEDIUM'),
@@ -25,6 +27,7 @@ cheese_choice = (
     ('Low-fat', 'LOW FAT'),
 )
 
+# models
 class Pizza(models.Model):
     id = models.AutoField(primary_key=True)
     size = models.CharField(max_length=6, choices=size_choice, default='Medium')

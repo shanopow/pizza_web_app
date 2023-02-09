@@ -23,44 +23,17 @@ class CustomerForm(forms.ModelForm):
         
         if len(str(dat)) != 5:
             raise forms.ValidationError('Invalid Expiry Date')
+        
         elif dat[2] != '/':
             raise forms.ValidationError('Invalid Expiry Date')
         
-        if data_m not in allowed_months:
+        elif data_m not in allowed_months:
             raise forms.ValidationError('Invalid Expiry Date')
 
-
-        if len(str(data['cvv'])) != 3:
+        elif len(str(data['cvv'])) != 3:
             raise forms.ValidationError('Invalid CVV') 
 
-
-        if len(str(data['card'])) > 19 or len(str(data['card'])) < 4:
+        elif len(str(data['card'])) > 19 or len(str(data['card'])) < 4:
             raise forms.ValidationError('Invalid card Number')
-        
+
         return data
-
-
-    '''
-    def clean(self):
-        # extract data
-        data = self.cleaned_data
-        card = data['card']
-        expiry_date = data['expiry']
-        cvv = data['cvv']
-
-        try:
-            exp_m = int(expiry_date[0:2])
-            exp_y = int(expiry_date[3:5])
-            if expiry_date[2] != '/':
-                raise forms.ValidationError('Invalid Expiry Date')
-        except:
-            raise forms.ValidationError('Invalid Expiry Date')
-
-        if len(cvv) != 3:
-            raise forms.ValidationError('Invalid CVV') 
-
-        elif len(card) > 19 or len(card) < 4:
-            raise forms.ValidationError('Invalid card Number')
-        
-        return data
-    '''
