@@ -10,6 +10,7 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['name', 'address', 'card', 'expiry', 'cvv']
+        
         # autofill for mm/yy
         widgets = {
             'expiry': forms.TextInput(attrs={'placeholder': 'MM/YY'}),
@@ -48,6 +49,4 @@ class CustomerForm(forms.ModelForm):
             data_y = int(data_y)
         except:
             raise forms.ValidationError('Year is invalid')
-        
-        
         return data

@@ -14,7 +14,7 @@ def index(request):
         request.session['authed'] = True
         cust_form = CustomerForm()
         return render(request, 'details.html', {'form': cust_form})
-    
+
     else:
         # get
         form = PizzaForm()
@@ -49,6 +49,6 @@ def details(request):
             # get
             form = CustomerForm()
             return render(request, 'details.html', {'form': form})
-    else:
-        # not properly authed
-        return redirect('index')
+
+    # user not authed
+    return redirect('index')
