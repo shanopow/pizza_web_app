@@ -4,12 +4,13 @@
 
     <article>
         <header> <b>Pizza No. {{ pizza.id }}</b> </header>
-          {% for key, value in pizza.items %}
-            {% if key != '_state' and key != 'id' and key not in toppings %}  
-              <p> {{ key | title }} : {{ value }} <p>  
-            {% endif %}
-          {% endfor %}
-          <p> <b>Toppings: </b></p>
+            <p> Size : {{ pizza.size.holder }} <p>
+            <p> Crust : {{ pizza.crust.holder }} <p>
+            <p> Cheese : {{ pizza.cheese.holder }} <p>  
+            <p> Sauce : {{ pizza.sauce.holder }} <p>
+            
+            
+              <p> <b>Toppings: </b></p>
           <ul>
             {% for key, value in toppings.items %}
               {% if value %}

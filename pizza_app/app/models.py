@@ -1,44 +1,30 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-# pizza choices for dropdowns
-# move to be like django 3+ implementation with subclasses later
+class Size(models.Model):
+    id = models.AutoField(primary_key=True)
+    holder = models.CharField(max_length = 100)
 
+class Crust(models.Model):
+    id = models.AutoField(primary_key=True)
+    holder = models.CharField(max_length = 100)
+
+class Sauce(models.Model):
+    id = models.AutoField(primary_key=True)
+    holder = models.CharField(max_length = 100)
+
+class Cheese(models.Model):
+    id = models.AutoField(primary_key=True)
+    holder = models.CharField(max_length = 100)
 
 # models
 class Pizza(models.Model):
-   
     id = models.AutoField(primary_key=True)
-
-    size_choice = (
-        ('Small', 'SMALL'),
-        ('Medium', 'MEDIUM'),
-        ('Large', 'LARGE'),
-    )
-
-    crust_choice = (
-        ('Normal', 'NORMAL'),
-        ('Thin', 'THIN'),
-        ('Thick', 'THICK'),
-        ('Gluten free', 'GLUTEN FREE'),
-    )
-
-    sauce_choice = (
-        ('Tomato', 'TOMATO'), 
-        ('Bbq', 'BBQ'),
-    )
-
-    cheese_choice = (
-        ('Mozzarella', 'MOZZARELLA'),
-        ('Vegan', 'VEGAN'),
-        ('Low-fat', 'LOW FAT'),
-    )
-
-    size = models.CharField(max_length=6, choices=size_choice, default='Medium')
-    crust = models.CharField(max_length=11, choices=crust_choice, default='Normal')
-    sauce = models.CharField(max_length=6, choices=sauce_choice, default='Tomato')
-    cheese = models.CharField(max_length=10, choices=size_choice, default='Mozzarella')
-
+    size = models.ForeignKey(Size, on_delete=models.CASCADE)
+    crust = models.ForeignKey(Crust, on_delete=models.CASCADE)
+    sauce = models.ForeignKey(Sauce, on_delete=models.CASCADE)
+    cheese = models.ForeignKey(Cheese, on_delete=models.CASCADE)
+    
     pepperoni = models.BooleanField(default=False)
     chicken = models.BooleanField(default=False)
     ham = models.BooleanField(default=False)
@@ -46,6 +32,9 @@ class Pizza(models.Model):
     pepper = models.BooleanField(default=False)
     mushroom = models.BooleanField(default=False)
     onion = models.BooleanField(default=False)
+
+    def size_names(self):
+        return [s for s in self.size.all()]
 
 class Customer(models.Model):
     id = models.AutoField(primary_key=True)

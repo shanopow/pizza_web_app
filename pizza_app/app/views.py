@@ -7,14 +7,18 @@ from django.views.generic import TemplateView
 def index(request):
     if request.method == "POST":
         form = PizzaForm(request.POST)
-        pizz = form.save()
-        # move pizza_id to session so we can use it later in details
-        request.session['pizz_id'] = pizz.id
-        # dont need validation as only dropdowns and booleans in PizzaForm
-        request.session['authed'] = True
-        cust_form = CustomerForm()
-        return render(request, 'details.html', {'form': cust_form})
-
+        if form.is_valid():
+            pizz = form.save()
+            # move pizza_id to session so we can use it later in details
+            request.session['pizz_id'] = pizz.id
+            # dont need validation as only dropdowns and booleans in PizzaForm
+            request.session['authed'] = True
+            cust_form = CustomerForm()
+            return render(request, 'details.html', {'form': cust_form})
+        else:
+            # didnt validate somehow
+            form = PizzaForm()
+            return render(request, 'index.html', {'form': form})
     else:
         # get
         form = PizzaForm()
@@ -40,7 +44,7 @@ def details(request):
                 order.save()
                 # make dicts of the object so we can print nicer in the template
                 # could give order model but nastier template then
-                return render(request, 'final.html', {'pizza' : order.pizza.__dict__, 'customer' : order.customer.__dict__, 'toppings' : toppings})
+                return render(request, 'final.html', {'pizza' : order.pizza, 'customer' : order.customer.__dict__, 'toppings' : toppings})
         
             else:
                 # bad form

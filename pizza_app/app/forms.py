@@ -1,10 +1,21 @@
 from django import forms
 from .models import *
 
+# use this for tweaking output of the ManyToManys to be better
+class CustomMCF(forms.ModelChoiceField):
+    def label_from_instance(self, member):
+        return "%s" % member.holder
+
 class PizzaForm(forms.ModelForm):
+
+    size = CustomMCF(queryset=Size.objects.all(), widget=forms.RadioSelect)
+    crust = CustomMCF(queryset=Crust.objects.all(), widget=forms.RadioSelect)
+    sauce = CustomMCF(queryset=Sauce.objects.all(), widget=forms.RadioSelect)
+    cheese = CustomMCF(queryset=Cheese.objects.all(), widget=forms.RadioSelect)
+    
     class Meta:
         model = Pizza
-        fields = ['size','crust','sauce', 'cheese', 'pepperoni', 'chicken', 'ham', 'pineapple', 'pepper', 'mushroom', 'onion']
+        fields = ['size', 'crust', 'sauce', 'cheese', 'pepperoni', 'chicken', 'ham', 'pineapple', 'pepper', 'mushroom', 'onion']
 
 class CustomerForm(forms.ModelForm):
     class Meta:

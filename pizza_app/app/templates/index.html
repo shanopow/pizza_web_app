@@ -1,31 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1> Order </h1>
 <form action="" method="post">
     <h3>Make your pizza</h3>
     {% csrf_token %}
-    <p>
-        {{ form.size.label }}<br>
+    
+    <article>
+        <h4>{{ form.size.label }} </h4>
         {{ form.size }}<br>
-    </p>        
-
-    <p>
-        {{ form.crust.label }}<br>
+    </article>
+    <br>
+    
+    <article>
+        <h4>{{ form.crust.label }} </h4>
         {{ form.crust}}<br>
-    </p>
-
-    <p>
-        {{ form.sauce.label }}<br>
+    </article>
+    <br>
+    
+    <article>
+        <h4>{{ form.sauce.label }} </h4>
         {{ form.sauce }}<br>
-    </p>
+    </article>
+    <br>
     
-    <p>
-        {{ form.cheese.label }}<br>
+    <article>
+        <h4>{{ form.cheese.label }} </h4>
         {{ form.cheese }}<br>
-    </p>
-    
-    <p>
+    </article>
+    <br>
+    <article>
+        <h4> Toppings </h4>
         {{form.pepperoni}}
         {{ form.pepperoni.label }}
         <br>
@@ -53,7 +57,7 @@
         {{form.onion}}
         {{ form.onion.label }}
         <br>
-    </p>
+    </article>
     <br>
     <p>
         <button type="submit">Submit</button>
