@@ -1,7 +1,7 @@
 from django import forms
 from .models import *
 
-# use this for tweaking output of the ManyToManys to be better
+# use this for printing holder of model in form choices
 class CustomMCF(forms.ModelChoiceField):
     def label_from_instance(self, member):
         return "%s" % member.holder
@@ -22,9 +22,10 @@ class CustomerForm(forms.ModelForm):
         model = Customer
         fields = ['name', 'address', 'card', 'expiry', 'cvv']
         
-        # autofill for mm/yy
+        # placeholders for for fields
         widgets = {
             'expiry': forms.TextInput(attrs={'placeholder': 'MM/YY'}),
+            'cvv': forms.TextInput(attrs={'placeholder': '000'}),
         }
 
     def clean(self):

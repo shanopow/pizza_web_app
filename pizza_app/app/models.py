@@ -38,11 +38,11 @@ class Pizza(models.Model):
 
 class Customer(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(default='Your Name Here', max_length=256)
-    address = models.CharField(default='Your Address Here', max_length=256)
-    card = models.IntegerField(default=0)
-    expiry = models.CharField(default='MM/YY', max_length=5)
-    cvv = models.IntegerField(default=000)
+    name = models.CharField(max_length=256)
+    address = models.CharField(max_length=256)
+    card = models.IntegerField()
+    expiry = models.CharField(max_length=5)
+    cvv = models.IntegerField()
 
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
