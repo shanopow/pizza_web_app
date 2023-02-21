@@ -27,7 +27,8 @@ def index(request):
 def details(request):
     # can progress if filled out customerforms
     if request.session.get('authed'):
-        if request.method == "POST":
+        request.session['authed'] = False
+	if request.method == "POST":
             form = CustomerForm(request.POST)
             if form.is_valid():
                 cust = form.save()
