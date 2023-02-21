@@ -1,38 +1,5 @@
-project spec re-written here with less fluff
+;Some points for further explanation:
 
-1.
-DONE
-index - create pizza with form
-redir to login page for name address payment which is authed
-
-DONE
-2. pizza form
-size
-crust type
-sauce tpye
-cheese
-BooleanField topping checkboxes for:
-    - Pepperoni
-    - Chicken
-    - Ham
-    - Pineapple
-    - Peppers
-    - Mushrooms
-    - Onions
-order (submit)
-
-DONE
-3. details form
-name
-address
-card number
-expiry date
-card cvv
-TO-DO
-must be validated
-
-DONE
-4. final page
-if validated is true redir again
-shows options selected on form
-(displaying a Customer and pizza model that took from the form)
+1. Sessions are used as cheap way to auth user and also to get the pizza we created on the index view. Cheap way of doing it but nice enough
+2. I only have two routes to keep it simple and asl oto reduce need for authing the user using the session. Keeps it very eleegnat in routes then.
+3. I make my own ModelChoiceField to use when displaying my forms. This lets me display them a bit nicer in the form output on a get request.

@@ -38,7 +38,7 @@ def details(request):
                 
                 # extract toppings for nice templating
                 toppings = {'pepperoni': pizza.pepperoni, 'chicken': pizza.chicken, 'ham': pizza.ham, 'pineapple': pizza.pineapple, 'pepper': pizza.pepper, 'mushroom': pizza.mushroom, 'onion': pizza.onion}
-                
+
                 # make order
                 order = Order(customer=cust, pizza=pizza)
                 order.save()
