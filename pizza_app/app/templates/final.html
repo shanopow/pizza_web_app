@@ -4,11 +4,10 @@
 
     <article>
         <header> <b>Pizza No. {{ pizza.id }}</b> </header>
-            <p> Size : {{ pizza.size.holder }} <p>
-            <p> Crust : {{ pizza.crust.holder }} <p>
-            <p> Cheese : {{ pizza.cheese.holder }} <p>  
-            <p> Sauce : {{ pizza.sauce.holder }} <p>
-            
+            <p> Size : {{ pizza.size.holder }} </p>
+            <p> Crust : {{ pizza.crust.holder }} </p>
+            <p> Chkeese : {{ pizza.cheese.holder }} </p>  
+            <p> Sauce : {{ pizza.sauce.holder }} </p>
             
               <p> <b>Toppings: </b></p>
           <ul>
@@ -19,13 +18,14 @@
             {% endfor %}
           </ul>
     </article>
+    <br>
     <article>
-        <header> <b>Customer No. {{ customer.id }} </b> </header>
-        {% for key, value in customer.items %}
+      <header> <b>Customer No. {{ customer.id }} </b> </header>
+      {% for key, value in customer.items %}
         {% if key != '_state' and key != 'id' %}  
-        <p> {{ key | title }} : {{ value }} <p>  
+          <p> {{ key | title }} : {{ value }} <p>
         {% endif %}
-          {% endfor %}
-        </article>
+      {% endfor %}
+    </article>
 
 {% endblock %}
