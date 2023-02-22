@@ -3,19 +3,19 @@ from django.utils.translation import gettext_lazy as _
 
 class Size(models.Model):
     id = models.AutoField(primary_key=True)
-    holder = models.CharField(max_length = 100)
+    holder = models.CharField(max_length = 100, default="TOPPING_NAME_HERE")
 
 class Crust(models.Model):
     id = models.AutoField(primary_key=True)
-    holder = models.CharField(max_length = 100)
+    holder = models.CharField(max_length = 100, default="TOPPING_NAME_HERE")
 
 class Sauce(models.Model):
     id = models.AutoField(primary_key=True)
-    holder = models.CharField(max_length = 100)
+    holder = models.CharField(max_length = 100, default="TOPPING_NAME_HERE")
 
 class Cheese(models.Model):
     id = models.AutoField(primary_key=True)
-    holder = models.CharField(max_length = 100)
+    holder = models.CharField(max_length = 100, default="TOPPING_NAME_HERE")
 
 # models
 class Pizza(models.Model):

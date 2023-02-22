@@ -21,8 +21,8 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['name', 'address', 'card', 'expiry', 'cvv']
-        
-        # placeholders for for fields
+        errors=[]
+        # placeholders for fields
         widgets = {
             'expiry': forms.TextInput(attrs={'placeholder': 'MM/YY'}),
             'cvv': forms.TextInput(attrs={'placeholder': '000'}),
@@ -38,27 +38,33 @@ class CustomerForm(forms.ModelForm):
         
         # too short, cant be too long as form is char limited to 5
         if len(str(dat)) != 5:
-            raise forms.ValidationError('Expiry Date is too short')
+            errors.append('Expiry Date is too short')
         
         # expiry
-        elif dat[2] != '/':
-            raise forms.ValidationError('Missing "/" between month and year of expiry' )
+        if dat[2] != '/':
+            errors.append('Missing "/" between month and year of expiry')
         
         # expiry
-        elif data_m not in allowed_months:
-            raise forms.ValidationError('Month is invalid')
+        if data_m not in allowed_months:
+            errors.append('Month is invalid')
         
-        elif len(str(data['cvv'])) != 3:
-            raise forms.ValidationError('Invalid CVV') 
-
         # expiry
-        elif len(str(data['card'])) > 19 or len(str(data['card'])) < 4:
-            raise forms.ValidationError('Invalid Card Number')
+        if len(str(data['cvv'])) != 3:
+            errors.append('Invalid CVV') 
 
         # expiry, nasty way, change
         try:
             # make sure give an int
             data_y = int(data_y)
         except:
-            raise forms.ValidationError('Year is invalid')
+            errors.append('Year is invalid')
+        
+        # card length is not weird
+        elif len(str(data['card'])) > 19 or len(str(data['card'])) < 4:
+            errors.append('Invalid Card Number')
+        
+        if errors;
+            # raise an error if encountered any before in cleaning
+            raise ValidationError(errors)
+        
         return data
