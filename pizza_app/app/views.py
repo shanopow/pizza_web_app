@@ -27,7 +27,6 @@ def index(request):
 def details(request):
     # can progress if filled out customerforms
     if request.session.get('authed'):
-        request.session['authed'] = False
         if request.method == "POST":
             form = CustomerForm(request.POST)
             if form.is_valid():
@@ -45,6 +44,7 @@ def details(request):
                 order.save()
                 # make dicts of the object so we can print nicer in the template
                 # could give order model but nastier template then
+                request.session['authed'] = False
                 return render(request, 'final.html', {'pizza' : order.pizza, 'customer' : order.customer.__dict__, 'toppings' : toppings})
         
             else:
