@@ -1,7 +1,3 @@
-Google Drive link to video here:
-https://drive.google.com/drive/folders/1e8V0v54hFIbpVphj0sEILxVIDQ8-FGQd?usp=share_link
-
-
 Some points for further explanation:
 
 1. Sessions are used as cheap way to auth user and also to get the pizza we created on the index view. Cheap way of doing it but nice enough
