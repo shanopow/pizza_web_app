@@ -7,3 +7,15 @@ Some points for further explanation:
    256 chars is still enough for any user and can still be scaled up.
 5. Custom form-validation is not used in the pizza form due to their being no possible user inputs that are not defined by the database.
 6. In the customer validation, names and addresses are not validated to allow for fringe cases such as unicode chars and special chars. these could be in a user or address and so I remain non-opinionated.
+
+SETUP
+start basic
+python -m django startproject "here"
+make core/app directory
+python -m manage startapp "core/app"
+link app to settings
+add "app/core" to settings.py in "INSTALLED_APPS"
+make urls.py
+in outside urls.py add to urlpatterns
+path('',include('your_app_name.urls')),
+make templates forlder for templates in core/app
